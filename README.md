@@ -23,6 +23,17 @@ Se não abrir, verifique firewall (Linux: `sudo ufw allow 3000/tcp`) e que o cel
 
 O `next.config.ts` registra automaticamente o IP da máquina em `allowedDevOrigins` (exigido pelo Next.js 16 para JS e API funcionarem pelo IP da rede). **Reinicie** `npm run dev` após conectar em outra rede Wi‑Fi.
 
+### Deploy na Netlify
+
+Este projeto é **Next.js** (com API routes), não um React estático. **Não** use pasta de publicação `.` (raiz do repo).
+
+1. Conecte o repositório na Netlify.
+2. A Netlify deve detectar o `netlify.toml` (build: `npm run build` + plugin `@netlify/plugin-nextjs`).
+3. No painel, se existir **Publish directory**, deixe em branco ou use o que o preset Next.js sugere — **não** coloque `.`.
+4. Em **Environment variables**, configure `ADMIN_EMAIL`, `ADMIN_PASSWORD` e `NEXT_PUBLIC_WHATSAPP_NUMBER`.
+
+**Limitação:** em serverless, `data/catalog.json` e `public/uploads/` **não persistem** de forma confiável. Para produção, use Supabase (ou similar) como planejado.
+
 Configure no `.env.local`:
 
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` — DDI + DDD + número, só dígitos
