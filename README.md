@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rafa Store
 
-## Getting Started
+Loja de moda feminina em Next.js (TypeScript), com vitrine em uma página, carrinho lateral e checkout via WhatsApp.
 
-First, run the development server:
+## Como rodar
 
 ```bash
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Loja: [http://localhost:3000](http://localhost:3000)
+- Admin: [http://localhost:3000/admin](http://localhost:3000/admin)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Acessar pelo celular/tablet (mesma rede Wi‑Fi)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ao rodar `npm run dev`, o terminal mostra o IP correto (ex.: `http://192.168.0.22:3000`).
 
-## Learn More
+**Não use** `http://0.0.0.0:3000` — isso só indica que o servidor escuta em todas as interfaces; em outro aparelho você precisa do **IP do computador** na rede.
 
-To learn more about Next.js, take a look at the following resources:
+Se não abrir, verifique firewall (Linux: `sudo ufw allow 3000/tcp`) e que o celular não está em rede visitante com isolamento de clientes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O `next.config.ts` registra automaticamente o IP da máquina em `allowedDevOrigins` (exigido pelo Next.js 16 para JS e API funcionarem pelo IP da rede). **Reinicie** `npm run dev` após conectar em outra rede Wi‑Fi.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Configure no `.env.local`:
 
-## Deploy on Vercel
+- `NEXT_PUBLIC_WHATSAPP_NUMBER` — DDI + DDD + número, só dígitos
+- `ADMIN_EMAIL` e `ADMIN_PASSWORD` — acesso ao painel (valores de exemplo em `.env.example`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — desenvolvimento
+- `npm run build` / `npm start` — produção
+- `npm run lint` — Biome
+- `npm run format` — formatar com Biome
+
+## Estrutura (atomic design)
+
+- `src/components/atoms` — botões, inputs, ícones
+- `src/components/molecules` — card de produto, carrossel, item do carrinho
+- `src/components/organisms` — header, drawer, seções, admin
+- `src/components/templates` — layout da loja e do admin
+- `src/store` — Redux (catálogo, carrinho, auth, UI)
+
+Catálogo e carrinho persistem no `localStorage`. Imagens do admin são salvas em `public/uploads/` via `POST /api/upload`.

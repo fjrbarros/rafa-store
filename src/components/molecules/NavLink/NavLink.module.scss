@@ -1,0 +1,26 @@
+.link {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #5c2e38;
+  cursor: pointer;
+  padding: 0.35rem 0;
+  position: relative;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c97b84, #e8b4bc);
+  transition: width 0.25s ease;
+}
+
+.link:hover::after {
+  width: 100%;
+}

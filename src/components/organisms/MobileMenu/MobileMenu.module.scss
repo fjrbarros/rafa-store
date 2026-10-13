@@ -1,0 +1,85 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  justify-content: flex-end;
+  touch-action: none;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border: none;
+  background: rgba(60, 30, 38, 0.45);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+  width: min(320px, 88vw);
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  background: #fff8fa;
+  padding: 1.25rem;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+  animation: slideIn 0.28s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-display), serif;
+  font-size: 1.25rem;
+  color: #5c2e38;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  background: none;
+  color: #7a3f4a;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.empty {
+  margin: 0;
+  color: #8a7080;
+  font-size: 0.95rem;
+}
+
+.links button {
+  font-size: 1.05rem;
+  text-align: left;
+}

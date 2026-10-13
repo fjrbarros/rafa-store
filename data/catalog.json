@@ -1,0 +1,121 @@
+{
+  "sections": [
+    {
+      "id": "sec-1791081987728",
+      "name": "T-SHIRTS.",
+      "slug": "t-shirts"
+    },
+    {
+      "id": "sec-1791082384706",
+      "name": "LANGERIES",
+      "slug": "langeries"
+    },
+    {
+      "id": "sec-1791082392801",
+      "name": "VESTIDOS",
+      "slug": "vestidos"
+    },
+    {
+      "id": "sec-1791082399045",
+      "name": "SAIAS",
+      "slug": "saias"
+    },
+    {
+      "id": "sec-1791084298798",
+      "name": "PIJAMAS",
+      "slug": "pijamas"
+    }
+  ],
+  "products": [
+    {
+      "sectionId": "sec-1791081987728",
+      "title": "Calvin klein",
+      "description": "Camiseta feminina listrada, manga curta,",
+      "price": 129.99,
+      "images": [
+        "/uploads/1791082905469-T-shirtslistrabp1.jpg"
+      ],
+      "id": "prod-1791082905474"
+    },
+    {
+      "sectionId": "sec-1791081987728",
+      "title": "Calvin Klein",
+      "description": "Camiseta listrada, mangas curtas e gola u,",
+      "price": 189.99,
+      "images": [
+        "/uploads/1791083086163-T-shirts2.jpg",
+        "/uploads/1791083086171-T-shirts.jpg"
+      ],
+      "id": "prod-1791083086175"
+    },
+    {
+      "sectionId": "sec-1791082392801",
+      "title": "Vestido safira",
+      "description": "Vestido Sem Manga Calvin Klein Jeans Feminino Gola Alta Marrom",
+      "price": 379.99,
+      "images": [
+        "/uploads/1791083295348-Vestido-safira.jpg",
+        "/uploads/1791083295356-vestidosafira2.jpg",
+        "/uploads/1791083295363-vestido-safira12.jpg"
+      ],
+      "id": "prod-1791083295367"
+    },
+    {
+      "sectionId": "sec-1791082392801",
+      "title": "Vestido linho",
+      "description": "Vestido Feminino Linho Misto Estampado - Amarelo manteiga",
+      "price": 490.99,
+      "images": [
+        "/uploads/1791083454551-vestidolinho.jpg",
+        "/uploads/1791083454561-vestidolinho1.jpg",
+        "/uploads/1791083454571-vestidolinho34.jpg",
+        "/uploads/1791083454578-vestidolinho4.jpg"
+      ],
+      "id": "prod-1791083454581"
+    },
+    {
+      "sectionId": "sec-1791082384706",
+      "title": "Conjuntoluana",
+      "description": "Bojo Icon Script Modal Branco\nCalsinha de modal",
+      "price": 169.99,
+      "images": [
+        "/uploads/1791083733639-conjuntobranco.jpg",
+        "/uploads/1791083733650-conjuntoluana1.jpg"
+      ],
+      "id": "prod-1791083733654"
+    },
+    {
+      "sectionId": "sec-1791082399045",
+      "title": "Saia midi laise",
+      "description": "Saia Midi de Laise",
+      "price": 359.99,
+      "images": [
+        "/uploads/1791083948278-saiamidi1.jpg",
+        "/uploads/1791083948286-saiamid.jpg",
+        "/uploads/1791083948298-saiamidii.jpg"
+      ],
+      "id": "prod-1791083948302"
+    },
+    {
+      "sectionId": "sec-1791084298798",
+      "title": "Pijama Feminino Manga Curta e Short Pima Cotton",
+      "description": "PIJAMA MANGA CURTA",
+      "price": 449.99,
+      "images": [
+        "/uploads/1791084389749-pijama1.jpg",
+        "/uploads/1791084389757-pijamacoton.jpg"
+      ],
+      "id": "prod-1791084389761"
+    },
+    {
+      "sectionId": "sec-1791082399045",
+      "title": "Saia Lapis Feminina de Couro Marrom",
+      "description": "Saia Lapis Feminina de Couro Marrom",
+      "price": 990.99,
+      "images": [
+        "/uploads/1791084572605-saiacouro.jpg"
+      ],
+      "id": "prod-1791084572610"
+    }
+  ]
+}
