@@ -12,5 +12,9 @@ export function getUploadUrlsToDelete(
       .flatMap((product) => product.images),
   );
 
-  return urls.filter((url) => url.startsWith("/uploads/") && !stillUsed.has(url));
+  return urls.filter(
+    (url) =>
+      (url.startsWith("/uploads/") || url.startsWith("/api/uploads/")) &&
+      !stillUsed.has(url),
+  );
 }

@@ -4,11 +4,16 @@ export function getUploadsDirectory(): string {
   return path.join(process.cwd(), "public", "uploads");
 }
 
-/** Converte `/uploads/arquivo.jpg` em nome de arquivo seguro, ou null. */
+/** Converte `/uploads/...` ou `/api/uploads/...` em nome de arquivo seguro, ou null. */
 export function uploadUrlToFilename(url: string): string | null {
-  if (!url.startsWith("/uploads/")) return null;
+  const prefix = url.startsWith("/api/uploads/")
+    ? "/api/uploads/"
+    : url.startsWith("/uploads/")
+      ? "/uploads/"
+      : null;
+  if (!prefix) return null;
 
-  const filename = path.basename(url);
+  const filename = path.basename(url.slice(prefix.length));
   if (!filename || filename === "." || filename === "..") return null;
 
   return filename;

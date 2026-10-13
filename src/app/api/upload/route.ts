@@ -1,6 +1,5 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { NextResponse } from "next/server";
+import { publicUploadUrl, saveUploadFile } from "@/lib/uploadStorage";
 
 export async function POST(request: Request) {
   try {
@@ -15,14 +14,11 @@ export async function POST(request: Request) {
     const buffer = Buffer.from(bytes);
     const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
     const filename = `${Date.now()}-${safeName}`;
+    const contentType = file.type || "application/octet-stream";
 
-    const uploadsDir = path.join(process.cwd(), "public", "uploads");
-    await mkdir(uploadsDir, { recursive: true });
+    await saveUploadFile(filename, buffer, contentType);
 
-    const filepath = path.join(uploadsDir, filename);
-    await writeFile(filepath, buffer);
-
-    return NextResponse.json({ url: `/uploads/${filename}` });
+    return NextResponse.json({ url: publicUploadUrl(filename) });
   } catch {
     return NextResponse.json({ error: "Erro ao salvar arquivo" }, { status: 500 });
   }

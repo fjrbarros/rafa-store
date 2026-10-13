@@ -32,7 +32,7 @@ Este projeto é **Next.js** (com API routes), não um React estático. **Não** 
 3. Em **Publish directory**, use **`.next`** ou deixe em branco se o `netlify.toml` já define `publish = ".next"`. **Nunca** use `.` (raiz do repo) — o deploy quebra com erro do plugin Next.js.
 4. Em **Environment variables**, configure `ADMIN_EMAIL`, `ADMIN_PASSWORD` e `NEXT_PUBLIC_WHATSAPP_NUMBER`.
 
-**Limitação:** em serverless, `data/catalog.json` e `public/uploads/` **não persistem** de forma confiável. Para produção, use Supabase (ou similar) como planejado.
+Na Netlify, catálogo e imagens do admin usam **Netlify Blobs** (URLs novas em `/api/uploads/...`). O `data/catalog.json` do repo só serve de seed no primeiro acesso. Para um backend maior no futuro, Supabase continua sendo a opção natural.
 
 Configure no `.env.local`:
 
