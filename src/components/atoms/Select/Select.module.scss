@@ -1,0 +1,132 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b3d47;
+}
+
+.nativeSelect {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.field {
+  position: relative;
+}
+
+.trigger {
+  width: 100%;
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+  border: 1px solid #e8c4cc;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3d2a2e;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.triggerPlaceholder {
+  color: #9a8590;
+  font-weight: 400;
+}
+
+.trigger:hover:not(:disabled) {
+  border-color: #d4a5ae;
+  background: #fff8fa;
+}
+
+.trigger:focus {
+  outline: none;
+  border-color: #c97b84;
+  box-shadow: 0 0 0 3px rgba(201, 123, 132, 0.2);
+}
+
+.triggerOpen {
+  border-color: #c97b84;
+  box-shadow: 0 0 0 3px rgba(201, 123, 132, 0.2);
+  background: #fff8fa;
+}
+
+.trigger:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  background: #fdf5f7;
+}
+
+.chevron {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a85d6b;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(90deg);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+.list {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  border: 1px solid #ecd0d8;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(122, 63, 74, 0.14);
+  max-height: 14rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.option {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #3d2a2e;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.option:hover {
+  background: #fceef2;
+  color: #5c2e38;
+}
+
+.optionSelected {
+  background: #f8e8ec;
+  color: #5c2e38;
+  font-weight: 600;
+}
+
+.optionSelected:hover {
+  background: #f3dde3;
+}

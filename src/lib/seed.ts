@@ -1,5 +1,7 @@
 import type { CatalogState } from "@/types/catalog";
 
+export const DEFAULT_PRODUCT_IMAGE = "/images/seed/default-product.svg";
+
 export const defaultCatalog: CatalogState = {
   sections: [
     { id: "sec-biquinis", name: "Biquínis", slug: "biquinis" },
@@ -15,7 +17,7 @@ export const defaultCatalog: CatalogState = {
       description:
         "Modelagem confortável com bojo removível. Tecido canelado macio, ideal para dias ensolarados à beira-mar.",
       price: 129.9,
-      images: ["/images/seed/biquini-rosa.svg", "/images/seed/biquini-rosa-alt.svg"],
+      images: [DEFAULT_PRODUCT_IMAGE],
     },
     {
       id: "prod-2",
@@ -24,7 +26,7 @@ export const defaultCatalog: CatalogState = {
       description:
         "Estampa floral feminina com amarração ajustável. Secagem rápida e caimento impecável.",
       price: 149.9,
-      images: ["/images/seed/biquini-floral.svg"],
+      images: [DEFAULT_PRODUCT_IMAGE],
     },
     {
       id: "prod-3",
@@ -33,7 +35,7 @@ export const defaultCatalog: CatalogState = {
       description:
         "Saia plissada com cintura alta. Combina com cropped e sandálias para um look leve e elegante.",
       price: 119.9,
-      images: ["/images/seed/saia-midi.svg"],
+      images: [DEFAULT_PRODUCT_IMAGE],
     },
     {
       id: "prod-4",
@@ -42,7 +44,7 @@ export const defaultCatalog: CatalogState = {
       description:
         "Jeans com lavagem clara e barra desfiada. Peça coringa para o guarda-roupa de verão.",
       price: 99.9,
-      images: ["/images/seed/saia-jeans.svg"],
+      images: [DEFAULT_PRODUCT_IMAGE],
     },
     {
       id: "prod-5",
@@ -51,7 +53,7 @@ export const defaultCatalog: CatalogState = {
       description:
         "Vestido longo em viscose com decote suave. Movimento leve para ocasiões especiais.",
       price: 189.9,
-      images: ["/images/seed/vestido-longo.svg"],
+      images: [DEFAULT_PRODUCT_IMAGE],
     },
     {
       id: "prod-6",
@@ -59,7 +61,7 @@ export const defaultCatalog: CatalogState = {
       title: "Blusa Cropped Renda",
       description: "Detalhe em renda nas mangas. Tom suave que valoriza qualquer produção.",
       price: 79.9,
-      images: ["/images/seed/blusa-renda.svg"],
+      images: [DEFAULT_PRODUCT_IMAGE],
     },
   ],
 };

@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { Button } from "@/components/atoms/Button/Button";
 import { Input } from "@/components/atoms/Input/Input";
+import { Select } from "@/components/atoms/Select/Select";
+import { ImageDropzone } from "@/components/molecules/ImageDropzone/ImageDropzone";
 import { Textarea } from "@/components/atoms/Textarea/Textarea";
-import { uploadProductImages } from "@/lib/upload";
+import { getUploadUrlsToDelete } from "@/lib/productImages";
+import { deleteProductImages, uploadProductImages } from "@/lib/upload";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { logout } from "@/store/slices/authSlice";
 import {
@@ -25,9 +28,18 @@ export function AdminDashboard() {
 
   const [sectionName, setSectionName] = useState("");
   const [sectionId, setSectionId] = useState(sections[0]?.id ?? "");
+
+  useEffect(() => {
+    if (sections.length === 0) return;
+    if (!sections.some((s) => s.id === sectionId)) {
+      setSectionId(sections[0].id);
+    }
+  }, [sections, sectionId]);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -41,32 +53,27 @@ export function AdminDashboard() {
 
   const handleAddProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const fileInput = form.elements.namedItem("images") as HTMLInputElement;
-    const files = fileInput?.files;
 
     if (!sectionId || !title.trim() || !price) {
       setMessage("Preencha seção, título e preço.");
       return;
     }
 
-    let images: string[] = [];
-    if (files && files.length > 0) {
-      setUploading(true);
-      try {
-        images = await uploadProductImages(files);
-      } catch {
-        setMessage("Erro ao enviar imagens.");
-        setUploading(false);
-        return;
-      }
-      setUploading(false);
-    }
-
-    if (images.length === 0) {
+    if (selectedImages.length === 0) {
       setMessage("Adicione pelo menos uma imagem.");
       return;
     }
+
+    setUploading(true);
+    let images: string[] = [];
+    try {
+      images = await uploadProductImages(selectedImages);
+    } catch {
+      setMessage("Erro ao enviar imagens.");
+      setUploading(false);
+      return;
+    }
+    setUploading(false);
 
     dispatch(
       addProduct({
@@ -81,8 +88,45 @@ export function AdminDashboard() {
     setTitle("");
     setDescription("");
     setPrice("");
-    form.reset();
+    setSelectedImages([]);
     setMessage("Produto cadastrado com sucesso!");
+  };
+
+  const handleRemoveProduct = async (productId: string) => {
+    const product = products.find((p) => p.id === productId);
+    if (!product) return;
+
+    const urls = getUploadUrlsToDelete(product.images, products, new Set([productId]));
+
+    try {
+      await deleteProductImages(urls);
+    } catch {
+      setMessage("Erro ao remover imagens do servidor.");
+      return;
+    }
+
+    dispatch(removeProduct(productId));
+    setMessage("Produto excluído.");
+  };
+
+  const handleRemoveSection = async (sectionIdToRemove: string) => {
+    const sectionProducts = products.filter((p) => p.sectionId === sectionIdToRemove);
+    const productIds = new Set(sectionProducts.map((p) => p.id));
+    const urls = getUploadUrlsToDelete(
+      sectionProducts.flatMap((p) => p.images),
+      products,
+      productIds,
+    );
+
+    try {
+      await deleteProductImages(urls);
+    } catch {
+      setMessage("Erro ao remover imagens do servidor.");
+      return;
+    }
+
+    dispatch(removeSection(sectionIdToRemove));
+    setMessage("Seção removida.");
   };
 
   return (
@@ -121,7 +165,7 @@ export function AdminDashboard() {
                 <button
                   type="button"
                   className={styles.linkBtn}
-                  onClick={() => dispatch(removeSection(s.id))}
+                  onClick={() => handleRemoveSection(s.id)}
                 >
                   Remover
                 </button>
@@ -136,20 +180,15 @@ export function AdminDashboard() {
         <section className={styles.card}>
           <h2>Novo produto</h2>
           <form className={styles.form} onSubmit={handleAddProduct}>
-            <label className={styles.selectLabel}>
-              Seção
-              <select
-                className={styles.select}
-                value={sectionId}
-                onChange={(e) => setSectionId(e.target.value)}
-              >
-                {sections.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <Select
+              label="Seção"
+              name="section"
+              value={sectionId}
+              onChange={(e) => setSectionId(e.target.value)}
+              disabled={sections.length === 0}
+              placeholder="Cadastre uma seção primeiro"
+              options={sections.map((s) => ({ value: s.id, label: s.name }))}
+            />
             <Input label="Título" value={title} onChange={(e) => setTitle(e.target.value)} />
             <Textarea
               label="Descrição"
@@ -163,10 +202,11 @@ export function AdminDashboard() {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
-            <label className={styles.fileLabel}>
-              Imagens
-              <input type="file" name="images" accept="image/*" multiple className={styles.file} />
-            </label>
+            <ImageDropzone
+              files={selectedImages}
+              onChange={setSelectedImages}
+              disabled={uploading}
+            />
             <Button type="submit" fullWidth disabled={uploading}>
               {uploading ? "Enviando..." : "Cadastrar produto"}
             </Button>
@@ -190,7 +230,7 @@ export function AdminDashboard() {
                   <button
                     type="button"
                     className={styles.linkBtn}
-                    onClick={() => dispatch(removeProduct(p.id))}
+                    onClick={() => handleRemoveProduct(p.id)}
                   >
                     Excluir
                   </button>

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current, type PayloadAction } from "@reduxjs/toolkit";
 import { fetchCatalogFromApi, saveCatalogToApi } from "@/lib/catalogApi";
 import {
   getCatalogState,
@@ -11,8 +11,9 @@ import { defaultCatalog } from "@/lib/seed";
 import type { CatalogState, Product, Section } from "@/types/catalog";
 
 function persistCatalog(state: CatalogState): void {
-  saveCatalogToStorage(state);
-  scheduleCatalogSync(state);
+  const snapshot = current(state);
+  saveCatalogToStorage(snapshot);
+  scheduleCatalogSync(snapshot);
 }
 
 function isRicherThanServer(local: CatalogState, server: CatalogState): boolean {

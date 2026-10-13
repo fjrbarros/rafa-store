@@ -5,8 +5,9 @@ let syncTimer: ReturnType<typeof setTimeout> | null = null;
 
 export function scheduleCatalogSync(catalog: CatalogState): void {
   if (typeof window === "undefined") return;
+  const payload = structuredClone(catalog);
   if (syncTimer) clearTimeout(syncTimer);
   syncTimer = setTimeout(() => {
-    void saveCatalogToApi(catalog);
+    void saveCatalogToApi(payload);
   }, 400);
 }

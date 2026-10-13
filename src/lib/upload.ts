@@ -21,3 +21,17 @@ export async function uploadProductImages(files: FileList | File[]): Promise<str
 
   return urls;
 }
+
+export async function deleteProductImages(urls: string[]): Promise<void> {
+  if (urls.length === 0) return;
+
+  const response = await fetch("/api/upload/delete", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ urls }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Falha ao remover imagens");
+  }
+}

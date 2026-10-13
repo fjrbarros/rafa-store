@@ -1,0 +1,131 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b3d47;
+}
+
+.hiddenInput {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  min-height: 140px;
+  padding: 1.25rem 1rem;
+  border: 2px dashed #e8c4cc;
+  border-radius: 14px;
+  background: linear-gradient(160deg, #fff8fa, #fdf0f4);
+  color: #7a3f4a;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dropzone:hover:not(:disabled) {
+  border-color: #c97b84;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(168, 93, 107, 0.1);
+}
+
+.dropzoneActive {
+  border-color: #a85d6b;
+  background: #fceef2;
+  box-shadow: 0 0 0 3px rgba(201, 123, 132, 0.2);
+}
+
+.dropzoneDisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon {
+  display: flex;
+  color: #c97b84;
+  margin-bottom: 0.15rem;
+}
+
+.dropzoneTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #5c2e38;
+  text-align: center;
+}
+
+.dropzoneHint {
+  font-size: 0.8rem;
+  color: #9a8590;
+  text-align: center;
+}
+
+.previewList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 0.65rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.previewItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ecd0d8;
+  background: #fff;
+}
+
+.previewImage {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.previewName {
+  padding: 0.25rem 0.35rem 0.35rem;
+  font-size: 0.65rem;
+  line-height: 1.2;
+  color: #7a6670;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #a85d6b;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.removeBtn:disabled {
+  cursor: not-allowed;
+}
