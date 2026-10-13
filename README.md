@@ -29,7 +29,7 @@ Este projeto é **Next.js** (com API routes), não um React estático. **Não** 
 
 1. Conecte o repositório na Netlify.
 2. A Netlify deve detectar o `netlify.toml` (build: `npm run build` + plugin `@netlify/plugin-nextjs`).
-3. No painel, se existir **Publish directory**, deixe em branco ou use o que o preset Next.js sugere — **não** coloque `.`.
+3. Em **Publish directory**, use **`.next`** ou deixe em branco se o `netlify.toml` já define `publish = ".next"`. **Nunca** use `.` (raiz do repo) — o deploy quebra com erro do plugin Next.js.
 4. Em **Environment variables**, configure `ADMIN_EMAIL`, `ADMIN_PASSWORD` e `NEXT_PUBLIC_WHATSAPP_NUMBER`.
 
 **Limitação:** em serverless, `data/catalog.json` e `public/uploads/` **não persistem** de forma confiável. Para produção, use Supabase (ou similar) como planejado.
